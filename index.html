@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<title>Tour Guarapuava</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone-frame">
+  <div class="app" id="app">
+
+    <!-- ============ HOME ============ -->
+    <section class="screen" id="screen-home" data-screen="home">
+      <header class="app-header header-home">
+        <div class="header-top">
+          <button class="icon-btn" aria-label="Abrir menu">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button class="icon-btn" aria-label="Notificações">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 22a2.2 2.2 0 0 0 2.2-2.2H9.8A2.2 2.2 0 0 0 12 22Zm7-6.2V11a7 7 0 0 0-5.5-6.8V3a1.5 1.5 0 0 0-3 0v1.2A7 7 0 0 0 5 11v4.8L3 18v1h18v-1l-2-2.2Z" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="brand">
+          <span class="brand-script">Tour</span>
+          <h1 class="brand-title">Guarapuava <span class="leaf" aria-hidden="true">🌿</span></h1>
+          <p class="brand-sub">Descubra o melhor da nossa cidade</p>
+        </div>
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="text" id="home-search" placeholder="Buscar lugares..." aria-label="Buscar lugares">
+        </div>
+      </header>
+
+      <div class="app-body">
+        <div id="search-results" class="search-results hidden" aria-live="polite"></div>
+
+        <div id="home-default-content">
+          <section class="section" aria-labelledby="cat-title">
+            <div class="section-head">
+              <h2 id="cat-title">Categorias</h2>
+              <button class="link-btn" data-action="ver-todas-categorias">Ver todas</button>
+            </div>
+            <div class="category-row" id="category-row"></div>
+          </section>
+
+          <section class="section" aria-labelledby="dest-title">
+            <div class="section-head">
+              <h2 id="dest-title">Destaques</h2>
+              <button class="link-btn" data-action="ver-todas-destaques">Ver todas</button>
+            </div>
+            <div class="highlight-row" id="highlight-row"></div>
+          </section>
+
+          <section class="section" aria-labelledby="near-title">
+            <div class="section-head">
+              <h2 id="near-title">Próximos de você</h2>
+              <button class="link-btn" data-action="ver-todas-proximos">Ver todas</button>
+            </div>
+            <div class="near-row" id="near-row"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAPA ============ -->
+    <section class="screen" id="screen-mapa" data-screen="mapa">
+      <header class="app-header header-solid">
+        <button class="icon-btn" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <h1 class="header-title">Mapa</h1>
+        <button class="icon-btn" aria-label="Filtrar">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16l-6 8v6l-4-2v-4L4 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/></svg>
+        </button>
+      </header>
+
+      <div class="map-search-wrap">
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="text" id="map-search" placeholder="Buscar neste mapa..." aria-label="Buscar neste mapa">
+        </div>
+      </div>
+
+      <div class="map-wrap">
+        <div class="map-canvas" id="map-canvas">
+          <div class="map-water"></div>
+          <div class="map-park"></div>
+          <div class="map-road map-road-h1"></div>
+          <div class="map-road map-road-h2"></div>
+          <div class="map-road map-road-v1"></div>
+          <div class="map-road map-road-v2"></div>
+          <div class="user-dot" title="Sua localização"></div>
+          <div id="map-markers"></div>
+        </div>
+        <div class="map-controls">
+          <button class="map-ctrl-btn" aria-label="Camadas">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2 2 7l10 5 10-5-10-5Z" fill="currentColor"/><path d="M2 12l10 5 10-5M2 17l10 5 10-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="map-ctrl-btn" id="locate-btn" aria-label="Minha localização">
+            <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="map-preview" id="map-preview">
+        <p class="map-preview-hint">Toque em um marcador para ver detalhes</p>
+      </div>
+    </section>
+
+    <!-- ============ DETALHES ============ -->
+    <section class="screen" id="screen-detalhes" data-screen="detalhes">
+      <div class="detail-scroll" id="detail-scroll">
+        <div class="detail-hero">
+          <img id="detail-img" src="" alt="">
+          <div class="detail-hero-top">
+            <button class="icon-btn icon-btn-glass" data-action="voltar-home" aria-label="Voltar">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <h1 class="detail-hero-title" id="detail-name-top">Ponto turístico</h1>
+            <button class="icon-btn icon-btn-glass" id="detail-fav-top-btn" aria-label="Favoritar">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.4 4.6 6 4.1c2-.3 3.8.7 6 2.9 2.2-2.2 4-3.2 6-2.9 3.6.5 5.5 3.9 4 7.6-2.5 4.7-10 9.3-10 9.3Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+          <span class="gallery-counter" id="gallery-counter">1/5</span>
+        </div>
+
+        <div class="detail-body">
+          <h2 class="detail-name" id="detail-name">Parque do Lago</h2>
+          <div class="detail-rating">
+            <span class="star">★</span>
+            <span id="detail-rating-value">4.8</span>
+            <span class="rating-count" id="detail-rating-count">(324 avaliações)</span>
+          </div>
+          <p class="detail-desc" id="detail-desc">Descrição do local.</p>
+
+          <div class="info-row">
+            <span class="info-icon">📍</span>
+            <div>
+              <p class="info-label">Endereço</p>
+              <p class="info-value" id="detail-endereco">-</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🕒</span>
+            <div>
+              <p class="info-label">Horário de funcionamento</p>
+              <p class="info-value" id="detail-horario">-</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">📞</span>
+            <div>
+              <p class="info-label">Telefone</p>
+              <p class="info-value" id="detail-telefone">-</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🌐</span>
+            <div>
+              <p class="info-label">Site</p>
+              <p class="info-value" id="detail-site">-</p>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <h2>Galeria</h2>
+            <button class="link-btn" data-action="ver-todas-galeria">Ver todas</button>
+          </div>
+          <div class="gallery-grid" id="gallery-grid"></div>
+
+          <div class="detail-actions">
+            <button class="btn btn-outline" id="btn-tracar-rota">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M4 20 20 4M4 4h6v6M20 20h-6v-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Traçar rota
+            </button>
+            <button class="btn btn-solid" id="btn-favoritar">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.4 4.6 6 4.1c2-.3 3.8.7 6 2.9 2.2-2.2 4-3.2 6-2.9 3.6.5 5.5 3.9 4 7.6-2.5 4.7-10 9.3-10 9.3Z" fill="currentColor"/></svg>
+              <span id="btn-favoritar-label">Favoritar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LINHAS ============ -->
+    <section class="screen" id="screen-linhas" data-screen="linhas">
+      <header class="app-header header-solid">
+        <button class="icon-btn" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <h1 class="header-title">Linhas de Ônibus</h1>
+        <button class="icon-btn" id="refresh-linhas" aria-label="Atualizar">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M20 11A8 8 0 1 0 19 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M20 5v6h-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </header>
+
+      <div class="app-body">
+        <div class="bus-locator-card">
+          <div>
+            <h2>Onde está meu ônibus?</h2>
+            <button class="btn btn-solid btn-small" id="btn-ver-no-mapa">Ver no mapa</button>
+          </div>
+          <div class="bus-illustration" aria-hidden="true">🚌</div>
+        </div>
+
+        <div class="section-head">
+          <h2>Linhas principais</h2>
+        </div>
+        <div id="linhas-list" class="linhas-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ LINHA DETALHADA ============ -->
+    <section class="screen" id="screen-linha-detalhe" data-screen="linha-detalhe">
+      <header class="app-header header-solid">
+        <button class="icon-btn" data-action="voltar-linhas" aria-label="Voltar">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h1 class="header-title" id="linha-titulo">Linha 101</h1>
+        <button class="icon-btn" aria-label="Favoritar linha">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.7 1.7 7-6.3-3.8L5.7 21l1.7-7L2 9.3l7.1-.7L12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+        </button>
+      </header>
+
+      <div class="app-body">
+        <div class="linha-info-card">
+          <span class="badge" id="linha-badge">101</span>
+          <div>
+            <p class="linha-info-nome" id="linha-info-nome">Centro – Parque do Lago</p>
+            <p class="linha-info-via" id="linha-info-via">Via Santa Cruz</p>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist">
+          <button class="tab-btn active" data-tab="trajeto" role="tab" aria-selected="true">Trajeto</button>
+          <button class="tab-btn" data-tab="horarios" role="tab" aria-selected="false">Horários</button>
+          <button class="tab-btn" data-tab="itinerario" role="tab" aria-selected="false">Itinerário</button>
+        </div>
+
+        <div class="tab-panel" id="tab-trajeto" role="tabpanel">
+          <div class="realtime-row">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <div>
+              <p class="realtime-title">Ônibus em tempo real</p>
+              <p class="realtime-sub">Atualizado agora há pouco</p>
+            </div>
+            <button class="icon-btn" id="refresh-trajeto" aria-label="Atualizar posição">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20 11A8 8 0 1 0 19 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M20 5v6h-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="route-map" id="route-map">
+            <svg viewBox="0 0 320 220" class="route-path-svg" aria-hidden="true">
+              <path id="route-path" d="M40,170 C40,90 100,40 170,40 C 230,40 240,90 280,90 C 300,90 300,140 260,150 C 220,160 160,140 150,110" fill="none" stroke="#2E7D32" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div class="route-stop route-stop-start" style="left:12%; top:77%;"></div>
+            <div class="route-stop" style="left:53%; top:18%;"></div>
+            <div class="route-stop route-stop-end" style="left:47%; top:50%;"></div>
+            <div class="bus-marker" id="bus-marker" style="left:80%; top:41%;">
+              <span aria-hidden="true">🚍</span>
+            </div>
+            <div class="bus-popup" id="bus-popup">
+              <p class="bus-popup-title">Ônibus 101</p>
+              <p class="bus-popup-sub">Aproximando-se da Estação Central</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel hidden" id="tab-horarios" role="tabpanel">
+          <div id="horarios-list" class="horarios-list"></div>
+        </div>
+
+        <div class="tab-panel hidden" id="tab-itinerario" role="tabpanel">
+          <div id="itinerario-list" class="itinerario-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAVORITOS ============ -->
+    <section class="screen" id="screen-favoritos" data-screen="favoritos">
+      <header class="app-header header-solid">
+        <button class="icon-btn" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <h1 class="header-title">Favoritos</h1>
+        <span class="icon-btn" aria-hidden="true"></span>
+      </header>
+      <div class="app-body">
+        <div id="favoritos-list"></div>
+        <div id="favoritos-empty" class="empty-state hidden">
+          <div class="empty-icon">🤍</div>
+          <h2>Nenhum favorito ainda</h2>
+          <p>Toque no coração de um local para salvá-lo aqui.</p>
+          <button class="btn btn-solid" data-action="ir-home">Explorar lugares</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PERFIL ============ -->
+    <section class="screen" id="screen-perfil" data-screen="perfil">
+      <header class="app-header header-solid">
+        <span class="icon-btn" aria-hidden="true"></span>
+        <h1 class="header-title">Perfil</h1>
+        <span class="icon-btn" aria-hidden="true"></span>
+      </header>
+      <div class="app-body">
+        <div class="profile-card">
+          <div class="profile-avatar" aria-hidden="true">👤</div>
+          <h2>Visitante</h2>
+          <p>visitante@tourguarapuava.com.br</p>
+        </div>
+        <div class="profile-stats">
+          <div class="profile-stat">
+            <strong id="stat-favoritos">0</strong>
+            <span>Favoritos</span>
+          </div>
+          <div class="profile-stat">
+            <strong>8</strong>
+            <span>Lugares</span>
+          </div>
+          <div class="profile-stat">
+            <strong>4</strong>
+            <span>Linhas</span>
+          </div>
+        </div>
+        <nav class="profile-menu">
+          <button class="profile-menu-item">⭐ Minhas avaliações</button>
+          <button class="profile-menu-item">🔔 Notificações</button>
+          <button class="profile-menu-item">🗺️ Preferências de mapa</button>
+          <button class="profile-menu-item">❓ Ajuda e suporte</button>
+          <button class="profile-menu-item">ℹ️ Sobre o Tour Guarapuava</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ============ LIGHTBOX (galeria) ============ -->
+    <div class="lightbox hidden" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">✕</button>
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-nav">
+        <button id="lightbox-prev" aria-label="Imagem anterior">‹</button>
+        <span id="lightbox-counter">1/5</span>
+        <button id="lightbox-next" aria-label="Próxima imagem">›</button>
+      </div>
+    </div>
+
+    <!-- ============ TOAST ============ -->
+    <div class="toast hidden" id="toast"></div>
+
+    <!-- ============ BOTTOM NAV ============ -->
+    <nav class="bottom-nav" aria-label="Navegação principal">
+      <button class="nav-item active" data-nav="home">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v10h14V10" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-nav="mapa">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21s7-6.6 7-11.5A7 7 0 0 0 5 9.5C5 14.4 12 21 12 21Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span>Mapa</span>
+      </button>
+      <button class="nav-item" data-nav="linhas">
+        <svg viewBox="0 0 24 24" width="22" height="22"><rect x="4" y="4" width="16" height="13" rx="3" stroke="currentColor" stroke-width="2" fill="none"/><line x1="4" y1="11" x2="20" y2="11" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="20" r="1.4" fill="currentColor"/><circle cx="16" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span>Linhas</span>
+      </button>
+      <button class="nav-item" data-nav="favoritos">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.4 4.6 6 4.1c2-.3 3.8.7 6 2.9 2.2-2.2 4-3.2 6-2.9 3.6.5 5.5 3.9 4 7.6-2.5 4.7-10 9.3-10 9.3Z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span>Favoritos</span>
+      </button>
+      <button class="nav-item" data-nav="perfil">
+        <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4.5 20c1.4-3.6 4.4-5.5 7.5-5.5s6.1 1.9 7.5 5.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        <span>Perfil</span>
+      </button>
+    </nav>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
